@@ -10,7 +10,7 @@ func KittensHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write([]byte(`{"kittens": [
 		{"id": 1, "name": "Bobby", "picture": "http://placekitten.com/200/200"},
-		{"id": 2, "name": "Wally", "picture": "http://placekitten.com/200/200"},
+		{"id": 2, "name": "Wally", "picture": "http://placekitten.com/200/200"}
 	]}`))
 }
 

@@ -9,6 +9,10 @@
 
 <script type="text/x-handlebars">
 <div class="container">
+  <ul class="nav nav-tabs">
+    <li>{{#linkTo index}}Index{{/linkTo}}</li>
+    <li>{{#linkTo create}}Create{{/linkTo}}</li>
+  </ul>
   {{outlet}}
 </div>
 </script>
@@ -26,6 +30,13 @@
   </li>
 {{/each}}
 </ul>
+</script>
+
+<script type="text/x-handlebars" data-template-name="create">
+<form {{action save on="submit"}} class="form-inline">
+  {{input type="text" value=name}}
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>
 </script>
 
 <script src="js/lib/jquery.js"></script>

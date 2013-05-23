@@ -17,14 +17,19 @@ type KittenJSON struct {
 	Kitten Kitten `json:"kitten"`
 }
 
+type KittensJSON struct {
+	Kittens []Kitten `json:"kittens"`
+}
+
+var kittens []Kitten
+
 func KittensHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Write([]byte(`{"kittens": [
-		{"id": 1, "name": "Bobby", "picture": "http://placekitten.com/300/200"},
-		{"id": 2, "name": "Wally", "picture": "http://placekitten.com/300/200"},
-		{"id": 3, "name": "Sammy", "picture": "http://placekitten.com/300/200"},
-		{"id": 4, "name": "Dopey", "picture": "http://placekitten.com/300/200"}
-	]}`))
+	j, err := json.Marshal(KittensJSON{Kittens: kittens})
+	if err != nil {
+		panic(err)
+	}
+	w.Write(j)
 }
 
 func CreateKittenHandler(w http.ResponseWriter, r *http.Request) {
@@ -37,8 +42,10 @@ func CreateKittenHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Grab the kitten and set some dummy data
 	kitten := kittenJSON.Kitten
-	kitten.Id = 5
+	kitten.Id = len(kittens) + 1
 	kitten.Picture = "http://placekitten.com/300/200"
+
+	kittens = append(kittens, kitten)
 
 	// Serialize the modified kitten to JSON
 	j, err := json.Marshal(KittenJSON{Kitten: kitten})

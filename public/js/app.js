@@ -33,6 +33,7 @@
 
       kitten.save().then(function() {
         this.transitionToRoute('index');
+        this.set('name', '');
       }.bind(this));
     }
   });

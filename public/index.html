@@ -25,6 +25,8 @@
       <img {{bindAttr src="picture"}}/>
       <div class="caption">
         <h3>{{name}}</h3>
+        <button {{action deleteKitten this}}>Delete</button>
+        {{#linkTo edit this}}Edit{{/linkTo}}
       </div>
     </div>
   </li>
@@ -32,11 +34,21 @@
 </ul>
 </script>
 
-<script type="text/x-handlebars" data-template-name="create">
+<script type="text/x-handlebars" data-template-name="_form">
 <form {{action save on="submit"}} class="form-inline">
   {{input type="text" value=name}}
   <button type="submit" class="btn btn-primary">Save</button>
 </form>
+</script>
+
+<script type="text/x-handlebars" data-template-name="create">
+<h1>Create kitten</h1>
+{{partial 'form'}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="edit">
+<h1>Edit kitten</h1>
+{{partial 'form'}}
 </script>
 
 <script src="js/lib/jquery.js"></script>
